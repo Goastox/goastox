@@ -28,14 +28,7 @@ public class AbstractToken<T> implements Token<T>, Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("{");
-        sb.append("\"lexeme\":\"")
-                .append(lexeme).append('\"');
-        sb.append(",\"line\":")
-                .append(line);
-        sb.append(",\"index\":")
-                .append(index);
-        sb.append('}');
-        return sb.toString();
+        return "[type='" + getType().name() + "',lexeme='" + lexeme + "',line=" + this.line +  "',index=" + this.index
+                + "]";
     }
 }

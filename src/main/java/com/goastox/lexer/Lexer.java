@@ -3,6 +3,7 @@ package com.goastox.lexer;
 import com.goastox.exception.CompileExpressionErrorException;
 import com.goastox.io.Handler;
 import com.goastox.lexer.token.*;
+import com.goastox.parser.Parse;
 
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
@@ -27,6 +28,9 @@ public class Lexer {
 
     private List<Token<?>> tokens = new LinkedList<>();
 
+    public List<Token<?>> getTokens() {
+        return tokens;
+    }
 
     public void next(){
         this.peek = this.iterator.next();
@@ -202,7 +206,6 @@ public class Lexer {
         }
     }
 
-
     public static void main(String[] args) throws Exception {
         String init = new Handler("/Users/konghanghang/goastox/src/main/java/com/goastox/io/r.txt").init();
         Lexer lexer = new Lexer(init);
@@ -252,7 +255,7 @@ public class Lexer {
     }
 
     static final char[] operator = {'+','-','*','/'};
-    static final String[] variable = {"if", "else", "switch", "case", "default", "while", "for", "break", "continue", "true", "false"};
+    static final String[] variable = {"if", "else", "switch", "case", "default", "while", "for", "break", "continue", "true", "false", "function"};
 
 
 }

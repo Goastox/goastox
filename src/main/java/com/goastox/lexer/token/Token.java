@@ -11,4 +11,8 @@ public interface Token<T> {
 
     String getLexeme();
 
+    Integer getLine();
+
+    Integer getIndex();
+
 }

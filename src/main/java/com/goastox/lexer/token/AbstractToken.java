@@ -18,12 +18,22 @@ public class AbstractToken<T> implements Token<T>, Serializable {
 
     @Override
     public TokenType getType() {
-        return null;
+        return this.getType();
     }
 
     @Override
     public String getLexeme() {
-        return null;
+        return this.lexeme;
+    }
+
+    @Override
+    public Integer getLine() {
+        return this.line;
+    }
+
+    @Override
+    public Integer getIndex() {
+        return this.index;
     }
 
     @Override
@@ -31,4 +41,6 @@ public class AbstractToken<T> implements Token<T>, Serializable {
         return "[type='" + getType().name() + "',lexeme='" + lexeme + "',line=" + this.line +  "',index=" + this.index
                 + "]";
     }
+
+
 }

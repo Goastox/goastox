@@ -1,0 +1,38 @@
+
+数据区：
+    @global_variable = global i32 0         全局变量
+    @global_constant = constant i32 0       常量
+
+栈：
+    %local_variable = alloca i32 0
+
+
+
+
+clang lltest.ll -o lltest
+
+
+装配就是把 文字指令翻译成二进制
+
+GAS语法
+
+汇编指令包含四个部分  标签、助记符、操作数、注释
+
+.section
+
+
+助记符：   助记符后加上b, w, l或q, 分别表示操作的是1个，2个，4个或8个字节
+    mov a b => a赋值给b
+
+    一个数字前加上$表示这个数本身。如果不加的话，则表示0这个地址里存储的数
+
+    在x86-64架构下，CPU中一共有16个64位通用寄存器，它们的名字依次是rax, rbx, rcx, rdx, rdi, rsi, rbp, rsp, r8, r9, r10, r11, r12, r13, r14, r15. 当我们用这些名字的时候，指的就是这16个64位通用寄存器。此外，对于前8个通用寄存器，也就是名字不是数字的寄存器，还可以用eax, ebx, ecx, edx, edi, esi, ebp, esp指代其低32位，用ax, bx, cx, dx, di, si, bp, sp指代其低16位。而对于rax, rbx, rcx, rdx这四个通用寄存器而言，还可以单独引用它低16位中的高8位和低8位，如对ax而言，ah指代其高8位，al指代其低8位
+    在GAS语法中，寄存器名字前面一定要跟着%.
+    movq    $0x2000001, %rax
+
+
+    call 是调用函数的
+
+    ret 是终止当前函数
+
+

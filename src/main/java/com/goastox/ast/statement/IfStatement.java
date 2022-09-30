@@ -1,14 +1,10 @@
 package com.goastox.ast.statement;
 
-import com.goastox.ast.Node;
+import com.goastox.ast.Cell;
+import com.goastox.lexer.token.Token;
 
-public class IfStatement {
+public class IfStatement extends Cell {
 
-    private Node condition;
-
-    private Node thenStatement;
-
-    private Node elseStatement;
-
-
+    public IfStatement() {
+    }
 }

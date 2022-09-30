@@ -1,20 +1,20 @@
 package com.goastox.parser;
 
 import com.alibaba.fastjson2.JSON;
-import com.goastox.ast.Node;
+import com.goastox.ast.Cell;
+import com.goastox.ast.Sign;
 import com.goastox.ast.Method;
-import com.goastox.ast.decl.Declaration;
-import com.goastox.ast.expr.BinaryExpr;
-import com.goastox.ast.expr.NumberTerminator;
-import com.goastox.ast.expr.StringTerminator;
+import com.goastox.ast.expression.Assign;
 import com.goastox.io.Handler;
 import com.goastox.lexer.Lexer;
 import com.goastox.lexer.token.Token;
 import com.goastox.lexer.token.Token.TokenType;
 import com.goastox.lexer.token.VariableToken;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Parse {
@@ -58,64 +58,99 @@ public class Parse {
             parse_fun();
         }else {
             if (currentToken.getType() == TokenType.String){
-                Declaration declaration = new Declaration(currentToken, currentToken.getLexeme());
-                declaration.setToken(currentToken);
+                Cell assign = new Assign();
+                assign.setLeft(new Cell(new Sign(currentToken.getLexeme(), currentToken)));
                 next();
                 if(currentToken.getLexeme().equals("=")){
+                    assign.setSign(new Sign<>(currentToken.getLexeme(), currentToken));
                     next();
-                    Node expr = expr();
-                    declaration.setExpr(expr);
-                    System.out.println(JSON.toJSONString(declaration));
+                    Cell expr = expr();
+                    assign.setRight(expr);
+                    System.out.println(JSON.toJSONString(assign));
+                    aaa(expr);
+                    list.stream().forEach(System.out::println);
+
+
+
                 }
             }
         }
     }
+    private List<String> list = new LinkedList<>();
 
-    private Node expr(){
+    public void aaa(Cell cell){
+        if(cell != null){
+            aaa(cell.getLeft());
+            aaa(cell.getRight());
+            String var = cell.getSign().getVar();
+            switch (cell.getSign().getToken().getType()){
+                case Number:
+                    list.add("sipush " + String.format("%08x", Integer.parseInt(var)));
+                    break;
+                case Char:
+                    switch (cell.getSign().getToken().getLexeme()){
+                        case "+":
+                            list.add("iadd");
+                            break;
+                        case "-":
+                            list.add("isub");
+                            break;
+                        case "*":
+                            list.add("imul");
+                            break;
+                        case "/":
+                            list.add("idiv");
+                            break;
+                    }
+                    break;
+            }
+        }
+    }
+
+
+    private Cell expr(){
         return expr_tail(term());
     }
 
-    private Node term(){
+    private Cell term(){
         return term_tail(factor());
     }
 
-    private Node expr_tail(Node expr){
+    private Cell expr_tail(Cell expr){
         if ("+".equals(currentToken.getLexeme()) || "-".equals(currentToken.getLexeme())) {
-            BinaryExpr binaryExpr = new BinaryExpr();
-            binaryExpr.setOperator(new Node(currentToken, currentToken.getLexeme()));
-            binaryExpr.setLeft(expr);
+            Cell cell = new Cell();
+            cell.setSign(new Sign(currentToken.getLexeme(), currentToken));
+            cell.setLeft(expr);
             next();
-            binaryExpr.setRight(term());
-            return expr_tail(binaryExpr);
+            cell.setRight(term());
+            return expr_tail(cell);
         }
         return expr;
     }
 
-    private Node term_tail(Node expr){
+    private Cell term_tail(Cell expr){
         if ("*".equals(currentToken.getLexeme()) || "/".equals(currentToken.getLexeme())){
-            BinaryExpr binaryExpr = new BinaryExpr();
-            binaryExpr.setOperator(new Node(currentToken, currentToken.getLexeme()));
-            binaryExpr.setLeft(expr);
+            Cell cell = new Cell();
+            cell.setSign(new Sign(currentToken.getLexeme(), currentToken));
+            cell.setLeft(expr);
             next();
-            binaryExpr.setRight(factor());
-            return term_tail(binaryExpr);
+            cell.setRight(factor());
+            return term_tail(cell);
         }
         return expr;
     }
-    private Node factor(){
+    private Cell factor(){
         if("(".equals(currentToken.getLexeme())){
             next();
-            Node expr = expr();
+            Cell expr = expr();
             if (")".equals(currentToken.getLexeme())){
                 next();
             }
             return expr;
         }else {
-            Node expr = null;
-            if (currentToken.getType() == TokenType.Number){
-                expr =  new NumberTerminator(currentToken, currentToken.getLexeme());
-            } else if (currentToken.getType() == TokenType.String) {
-                expr =  new StringTerminator(currentToken, currentToken.getLexeme());
+            Cell expr = new Cell();
+            if (currentToken.getType() == TokenType.Number || currentToken.getType() == TokenType.String){
+                expr.setSign(new Sign(currentToken.getLexeme(), currentToken));
             }
             next();
             return expr;

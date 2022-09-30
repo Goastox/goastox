@@ -14,4 +14,23 @@ function [x,y,c]  = aa(x,c,v){
 
 }
 }%
-x = 2+3 * 5;
+x = 20*100*35+57+100*8+4;
+%{
+
+{"left":{"token":{"index":1,"lexeme":"x","line":17,"type":0},"var":"x"},"right":{"left":{"left":{"left":{"left":{"left":{"token":{"index":5,"lexeme":"20","line":17,"type":2},"var":"20"},"right":{"token":{"index":8,"lexeme":"100","line":17,"type":2},"var":"100"},"sign":{"token":{"index":7,"lexeme":"*","line":17,"type":3},"var":"*"}},"right":{"token":{"index":12,"lexeme":"35","line":17,"type":2},"var":"35"},"sign":{"token":{"index":11,"lexeme":"*","line":17,"type":3},"var":"*"}},"right":{"token":{"index":15,"lexeme":"57","line":17,"type":2},"var":"57"},"sign":{"token":{"index":14,"lexeme":"+","line":17,"type":3},"var":"+"}},"right":{"left":{"token":{"index":18,"lexeme":"100","line":17,"type":2},"var":"100"},"right":{"token":{"index":22,"lexeme":"8","line":17,"type":2},"var":"8"},"sign":{"token":{"index":21,"lexeme":"*","line":17,"type":3},"var":"*"}},"sign":{"token":{"index":17,"lexeme":"+","line":17,"type":3},"var":"+"}},"right":{"token":{"index":24,"lexeme":"4","line":17,"type":2},"var":"4"},"sign":{"token":{"index":23,"lexeme":"+","line":17,"type":3},"var":"+"}},"sign":{"token":{"index":3,"lexeme":"=","line":17,"type":3},"var":"="}}
+sipush 00000014
+sipush 00000064
+imul
+sipush 00000023
+imul
+sipush 00000039
+iadd
+sipush 00000064
+sipush 00000008
+imul
+iadd
+sipush 00000004
+iadd
+}%
+
+

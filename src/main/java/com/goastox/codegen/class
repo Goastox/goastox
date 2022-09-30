@@ -1,0 +1,22 @@
+
+
+
+
+字段结构
+
+field_info {
+        u2             access_flags;		// 字段访问标志
+        u2             name_index;		// 字段名称
+        u2             descriptor_index;	// 字段类型
+        u2             attributes_count;	// 属性数量
+        attribute_info attributes[attributes_count];  // 属性项
+    }
+
+ 方法结构
+method_info {
+    u2 access_flags; //访问修饰符。。参照下图
+    u2 name_index;  // 一样。。。。
+    u2 descriptor_index; //一样。。。
+    u2 attributes_count; //一样。。。
+    attribute_info attributes[attributes_count];
+}

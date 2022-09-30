@@ -1,0 +1,84 @@
+public class Jtest {
+    public static void main(String[] args) {
+        System.out.println("hello");
+    }
+}
+
+ca fe ba be(魔术)
+
+0000 003d 版本号
+
+001d(常量池元素个数 29)
+
+1)0a（tag）0002(index -> 2) 0003 (index->3)
+2)07（tag表示类名的地址） 0004(index)
+3)0c(tag) 0005 0006
+4)01(tag) 0010(长度) 6a(j) 61(a) 76(v) 61(a) 2f(/) 6c(l) 61(a) 6e(n) 67(g) 2f(/) 4f(O) 62(b) 6a(j) 65(e) 63(c) 74(t)
+5)01（tag）0006(长度) 3c(<) 69(i) 6e(n) 69(i) 74(t) 3e(>)
+6)01(tag) 0003 28(()) 29() 56(V)
+7)09(tag) 0008 0009
+8)07(tag) 000a
+9)0c（tag） 000b 000c
+10)01 (tag) 0010(长度) 6a(j) 61（a） 76(v) 61(a) 2f(/) 6c(l) 61(a) 6e(n) 67(g) 2f(/) 53(s) 79(y) 73(s) 74(t) 65(e) 6d(m)
+11)01（tag） 0003(长度) 6f(o) 75(u) 74(t)
+12)01(tag)0015(长度) 4c6a 6176 612f 696f 2f50 7269 6e74 5374 7265 616d 3b
+13)08（tag） 000e(14)
+14)01(tag) 0005(长度) 68(h) 65(e) 6c(l) 6c(l) 6f(o)
+15)0a（tag）0010(index -> 16) 0011(idnex -> 17)
+16)07(tag) 0012(index->18)
+17)0c(tag)0013 0014
+18)01（tag） 0013(长度) 6a61 7661 2f69 6f2f 5072 696e 7453 7472 6561 6d
+19)01（tag） 0007(长度) 7072 696e 746c 6e
+20)01 （tag）0015(长度) 284c 6a61 7661 2f6c 616e 672f 5374 7269 6e67 3b29 56
+21)07（tag表示类名的地址） 0016
+22)01(tag) 0005(长度) 4a(J) 74(t) 65(e) 73(s) 74(t)
+23)01（tag）0004（长度） 43(C) 6f(o) 64(d) 65(e)
+24)01(tag) 000f(长度) 4c(L) 69(i) 6e(n) 65(e) 4e(N) 75(u) 6d(m) 62(b) 65(e) 72(r) 54(T) 61(a) 62(b) 6c(l) 65(e)
+25)01（tag） 0004（长度） 6d(m) 61(a) 69(i) 6e(n)
+26)01（tag）0016(长度) 28(()) 5b(]) 4c(L) 6a(j) 61(a) 76(v) 61(a) 2f(/) 6c(l) 61(a) 6e(n) 67(g) 2f(/) 53(S) 74(t) 72(r) 69(i) 6e(n) 67(g) 3b(=) 29()) 56(V)
+27)01(tag) 000a(长度) 53(S) 6f(o) 75(u) 72(r) 63(c) 65(e) 46(F) 69(i) 6c(l) 65(e)
+28)01（tag） 000a(长度) 4a(J) 74(t) 65(e) 73(s) 74(t) 2e(.) 6a(j) 61(a) 76(v) 61(a)
+
+
+0021(访问标识来表明这个class有什么修饰符 public)
+0015(this class-> Jtest)
+0002(super class java/lang/Object)
+0000(接口个数)
+0000(字段个数)
+
+0002(方法个数)
+
+0001(修饰符->public) 0005(字段名称index-><init> 0006(字段类型index) 0001(属性数量)
+[属性项]
+00 17(index->Code类型) 00 00 00 1d(表示长度)
+
+0001(max_stack) 0001(max_locals) 00 00 00 05(code_length) 2a b7 00 01 b1 (code)   0000(exception_table_length) 0001(attribute_count)
+
+0018 0000 0006 0001 0000 0001(attribute_info)
+
+
+0009 0019(index-> main) 001a(index->) 0001
+
+  0017  00 00 00 25
+
+  0002(max_stack) 0001(max_locals) 00 00 00 09(code_length)
+
+(code-> 存放字节码指令)
+   b2(getstatic 获取指定类的静态域, 并将其压入栈顶)  00 07
+   12 (ldc 将int,float或String型常量值从常量池中推送至栈顶)  0d (hello)
+   b6 (invokevirtual 调用实例方法 )   00 0f (15)
+   b1 （return void  ）
+
+
+  00 00(exception_table_length)
+  00 01(attribute_count)
+  0018(LineNumberTable)
+  00 00 00 0a(属性长度)
+    00 02（异常表的长度）
+	00 00 (字节码的索引号)  00 03（源代码的行号）
+  	00 08(字节码的索引号)   00 04（源代码的行号）
+
+属性表
+0001(多少个属性表)  00 1b（属性表种类-index-> SourceFile）
+00 00 00 02(表示后边两个字节)
+00 1c(Jtest.java)

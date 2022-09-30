@@ -2,15 +2,15 @@ package com.goastox.ast;
 
 import com.goastox.lexer.token.Token;
 
-public class Node<T> {
+// 符号
+public class Sign<T> {
+    private String var;
 
     private Token<T> token;
 
-    private String var;
-
-    public Node(Token<T> token, String var) {
-        this.token = token;
+    public Sign(String var, Token<T> token) {
         this.var = var;
+        this.token = token;
     }
 
     public Token<T> getToken() {
